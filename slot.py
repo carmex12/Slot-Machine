@@ -16,7 +16,7 @@ class slot:
         self.balance = starting_balance
         self.cooldown = False
 
-    def Spin(self):
+    def spin(self):
         if not self.cooldown:
             self.cooldown = True
             spinButton.config(state="disabled")
@@ -24,6 +24,7 @@ class slot:
             result = []
             for _ in range(3):
                 result.append(random.choice(symbols))
+            self.animation()
             output1.config(text=result[0])
             output2.config(text=result[1])
             output3.config(text=result[2])
@@ -34,6 +35,13 @@ class slot:
             time.sleep(0.1)
             spinButton.config(state="normal")
             self.cooldown = False
+    def animation(self,i=0):
+        if i < 4:
+            output1.config(text=random.choice(symbols))
+            output2.config(text=random.choice(symbols))
+            output3.config(text=random.choice(symbols))
+            root.after(100, self.animation, i + 1)
+        
 
 slot = slot(1000)
 root = Tk()
@@ -57,7 +65,7 @@ output2.grid(column=1, row=1)
 output3 = ttk.Label(frm, text="7",font=("Arial", 30, "bold"), width=3, anchor='center')
 output3.grid(column=2, row=1)
 
-spinButton = ttk.Button(frm, text="SPIN",command=slot.Spin)
+spinButton = ttk.Button(frm, text="SPIN",command=slot.spin)
 spinButton.grid(column=1, row=2)
 
 root.mainloop()
