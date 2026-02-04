@@ -1,1 +1,1 @@
-Simple slot machine game, made to practice and learn tkinker.
+Simple slot machine game, made to practice and learn tkinter.
